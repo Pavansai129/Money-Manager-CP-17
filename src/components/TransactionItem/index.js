@@ -11,6 +11,7 @@ const TransactionItem = props => {
     isClicked,
     deleteImg,
   } = eachTransaction
+  const transactionType = type.charAt(0).toUpperCase() + type.slice(1)
   const onDeleteTransaction = () => {
     deleteTransaction(transactionId)
   }
@@ -18,8 +19,8 @@ const TransactionItem = props => {
     <li className="transaction-item">
       <p className="each-transaction-item">{title}</p>
       <p className="each-transaction-item">{amount}</p>
-      <p className="each-transaction-item">{type}</p>
-      <button type="button" onClick={onDeleteTransaction}>
+      <p className="each-transaction-item">{transactionType}</p>
+      <button type="button" onClick={onDeleteTransaction} data-testid="delete">
         <img src={deleteImg} alt="delete" className="delete-image" />
       </button>
     </li>

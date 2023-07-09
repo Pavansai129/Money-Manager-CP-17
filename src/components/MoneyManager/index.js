@@ -34,7 +34,7 @@ class MoneyManager extends Component {
   getIncomeAmount = list => {
     let income = 0
     list.forEach(each => {
-      if (each.type === 'Income') {
+      if (each.type.toLowerCase() === 'income') {
         income += parseInt(each.amount)
       }
     })
@@ -44,7 +44,7 @@ class MoneyManager extends Component {
   getExpensesAmount = list => {
     let expenses = 0
     list.forEach(each => {
-      if (each.type === 'Expenses') {
+      if (each.type.toLowerCase() === 'expenses') {
         expenses += parseInt(each.amount)
       }
     })
@@ -82,7 +82,7 @@ class MoneyManager extends Component {
       transactionHistoryList: [...transactionHistoryList, transaction],
       title: '',
       amount: '',
-      type: '',
+      type: transactionTypeOptions[0].displayText,
     })
   }
 
@@ -120,6 +120,7 @@ class MoneyManager extends Component {
               amount={balanceAmount}
               imgUrl="https://assets.ccbp.in/frontend/react-js/money-manager/balance-image.png"
               alternate="balance"
+              testId="balanceAmount"
             />
             <MoneyDetails
               detail="Your Income"

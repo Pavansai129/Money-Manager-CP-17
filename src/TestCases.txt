@@ -1,0 +1,90 @@
+Total:41
+39
+2
+Money Manager tests
+
+41
+39
+2
+When a transaction is added, then the page should consist of at least one HTML list item and the transactionsList should be rendered using a unique key as a prop for each transaction item
+507 ms 
+Page should initially consist of HTML paragraph element with text content starting with "Welcome back to your"
+19 ms 
+Page should initially consist of HTML image element with alt attribute value as "balance" and src attribute value as URL for balance image
+53 ms 
+Page should consist of HTML paragraph element with text content as "Your Balance"
+13 ms 
+Page should initially consist of an HTML paragraph element with data-testid attribute value as "balanceAmount" and text content as "0"
+20 ms 
+Page should initially consist of HTML image element with alt attribute value as "income" and src attribute value as URL for income image
+64 ms 
+Page should consist of HTML paragraph element with text content as "Your Income"
+15 ms 
+Page should initially consist of an HTML paragraph element with data-testid attribute value as "incomeAmount" and text content as "0"
+12 ms 
+Page should initially consist of HTML image element with alt attribute value as "expenses" and src attribute value as URL for expenses image
+49 ms 
+Page should consist of HTML paragraph element with text content as "Your Expenses"
+14 ms 
+Page should initially consist of an HTML paragraph element with data-testid attribute value as "expensesAmount" and text content as "0"
+10 ms 
+Page should consist of HTML heading element with text content as "Add Transaction"
+48 ms 
+Page should consist of HTML input element with label text as "TITLE"
+43 ms 
+Page should consist of HTML input element with label text as "AMOUNT"
+42 ms 
+Page should consist of HTML select element with label text as "TYPE"
+33 ms 
+Page should consist of HTML option element with text content as the value of the key "displayText" of the first object in transactionTypeOptions provided
+61 ms 
+Page should consist of HTML option element with text content as the value of the key "displayText" of the second object in transactionTypeOptions provided
+43 ms 
+Page should consist of HTML option elements with value attribute as the value of the keys "optionId" in transactionTypeOptions provided
+82 ms 
+Page should consist of HTML select element which contains "Income" and "Expenses" as options
+94 ms 
+Page should consist of HTML button element with text content as "Add"
+31 ms 
+Page should consist of HTML heading element with text content as "History"
+36 ms 
+Page should consist of HTML paragraph element with text content as "Title"
+14 ms 
+Page should consist of HTML paragraph element with text content as "Amount"
+17 ms 
+Page should consist of HTML paragraph element with text content as "Type"
+13 ms 
+When non-empty values are provided in the HTML input elements, selected type and Add button is clicked, an HTML list item should be added to the transactions list with a unique id imported from the uuid package
+197 ms 
+When a transaction is added, then the HTML input element for title should be empty
+244 ms 
+When a transaction is added, then the HTML input element for amount should be empty
+206 ms 
+When a transaction is added with "Income" as the type, the balance amount should be displayed accordingly
+190 ms 
+When a transaction is added with "Income" as the type, the income amount should be displayed accordingly
+182 ms 
+When a transaction is added with "Income" as the type, the expenses amount should remain the same
+163 ms 
+When transactions are added with "Income" and "Expenses" as types, the balance amount, income amount and expenses amount should be displayed accordingly
+245 ms 
+When a transaction is added, then the page should consist of an HTML unordered list element to display the list of transactions
+223 ms 
+When a non-empty value is provided in the HTML input element for title, the value provided should be updated in the value of the input element
+90 ms 
+When a non-empty value is provided in the HTML input element for amount, the value provided should be updated in the value of the input element
+79 ms 
+When a value is selected in the HTML select element for type, the value provided should be updated in the value of the select element
+61 ms 
+When a transaction is added, then it should be added to the list of transactions
+163 ms 
+Each transaction should consist of an HTML image element with alt attribute value as "delete" and src attribute value as URL for delete image
+213 ms 
+When a transaction is added, then the HTML select element should be selected by default value
+211 ms 
+When a transaction is added, and the HTML button with data-testid as "delete" is clicked, the transaction item should be removed
+179 ms 
+When a single transaction is added, and the HTML button with data-testid as "delete" is clicked, then the Balance, Income, Expenses should be updated to their initial values
+174 ms 
+When multiple transactions are added, and one transaction is deleted, then the Balance, Income, Expenses should be updated accordingly
+438 ms 
