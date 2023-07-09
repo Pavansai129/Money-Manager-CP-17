@@ -1,6 +1,8 @@
 import {Component} from 'react'
 import './index.css'
+import {v4 as uuidv4} from 'uuid'
 import MoneyDetails from '../MoneyDetails'
+import TransactionItem from '../TransactionItem'
 
 const transactionTypeOptions = [
   {
@@ -16,12 +18,66 @@ const transactionTypeOptions = [
 // Write your code here
 
 class MoneyManager extends Component {
+  state = {
+    title: '',
+    amount: '',
+    type: transactionTypeOptions[0].displayText,
+    transactionHistoryList: [],
+    income: 0,
+    expenses: 0,
+  }
+
+  onTitleChange = event => this.setState({title: event.target.value})
+
+  onAmountChange = event => this.setState({amount: event.target.value})
+
+  onTypeChange = event => this.setState({type: event.target.value})
+
+  deleteTransaction = uniqueId => {
+    this.setState(prevState => ({
+      transactionHistoryList: prevState.transactionHistoryList.map(each => {
+        if (each.transactionId === uniqueId) {
+          return {...each, isClicked: !each.isClicked}
+        }
+        return each
+      }),
+    }))
+  }
+
+  addTransaction = event => {
+    event.preventDefault()
+    const {title, amount, type, transactionHistoryList} = this.state
+    const transactionId = uuidv4()
+    const isClicked = false
+    const deleteImg =
+      'https://assets.ccbp.in/frontend/react-js/money-manager/delete.png'
+    const transaction = {
+      transactionId,
+      title,
+      amount,
+      type,
+      isClicked,
+      deleteImg,
+    }
+    this.setState({
+      transactionHistoryList: [...transactionHistoryList, transaction],
+    })
+  }
+
   getTransactionType = () =>
     transactionTypeOptions.map(eachType => (
-      <option id={eachType.optionId}>{eachType.displayText}</option>
+      <option key={uuidv4()} id={eachType.optionId} value={eachType.optionId}>
+        {eachType.displayText}
+      </option>
     ))
 
   render() {
+    const {title, amount, transactionHistoryList} = this.state
+
+    const filteredTransactionsList = transactionHistoryList.filter(
+      eachTransaction => eachTransaction.isClicked === false,
+    )
+
     return (
       <div className="money-manager-app-bg-container">
         <div className="app-container">
@@ -34,35 +90,66 @@ class MoneyManager extends Component {
           <div className="money-details-container">
             <MoneyDetails
               detail="Balance"
-              amount="0"
+              amount={0}
               imgUrl="https://assets.ccbp.in/frontend/react-js/money-manager/balance-image.png"
               alternate="balance"
             />
             <MoneyDetails
               detail="Income"
-              amount="0"
+              amount={0}
               imgUrl="https://assets.ccbp.in/frontend/react-js/money-manager/income-image.png"
               alternate="income"
             />
             <MoneyDetails
               detail="Expenses"
-              amount="0"
+              amount={0}
               imgUrl="https://assets.ccbp.in/frontend/react-js/money-manager/expenses-image.png"
               alternate="expenses"
             />
           </div>
-          <div className="form-and-table-container">
-            <div>
+          <div className="form-and-history-container">
+            <div className="form-card">
               <h1>Add Transactions</h1>
-              <form className="input-form">
+              <form className="input-form" onSubmit={this.addTransaction}>
                 <label htmlFor="title">TITLE</label>
-                <input type="text" id="title" />
+                <input
+                  type="text"
+                  id="title"
+                  value={title}
+                  onChange={this.onTitleChange}
+                />
                 <label htmlFor="amount">AMOUNT</label>
-                <input type="number" id="amount" />
+                <input
+                  type="text"
+                  id="amount"
+                  value={amount}
+                  onChange={this.onAmountChange}
+                />
                 <label htmlFor="type">TYPE</label>
-                <select id="type">{this.getTransactionType()}</select>
+                <select id="type" onChange={this.onTypeChange}>
+                  {this.getTransactionType()}
+                </select>
                 <button type="submit">Add</button>
               </form>
+            </div>
+            <div className="history-card">
+              <div>
+                <h1>History</h1>
+                <div className="history-statement-first-row-container">
+                  <p className="table-column">Title</p>
+                  <p className="table-column">Amount</p>
+                  <p className="table-column">Type</p>
+                </div>
+              </div>
+              <ul className="transactions-history">
+                {filteredTransactionsList.map(eachTransaction => (
+                  <TransactionItem
+                    key={eachTransaction.transactionId}
+                    eachTransaction={eachTransaction}
+                    deleteTransaction={this.deleteTransaction}
+                  />
+                ))}
+              </ul>
             </div>
           </div>
         </div>

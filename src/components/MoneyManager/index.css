@@ -25,4 +25,29 @@
 .input-form {
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+.form-and-history-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.form-card {
+  width: 40%;
+}
+.history-card {
+  width: 40%;
+}
+.history-statement-first-row-container {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid grey;
+  padding-left: 10px;
+}
+.table-column {
+  margin-right: 20px;
+}
+.transactions-history {
+  padding-left: 0px;
 }
