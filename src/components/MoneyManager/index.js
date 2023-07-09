@@ -29,7 +29,10 @@ class MoneyManager extends Component {
 
   onAmountChange = event => this.setState({amount: event.target.value})
 
-  onTypeChange = event => this.setState({type: event.target.value})
+  onTypeChange = event => {
+    console.log(event.target.value)
+    this.setState({type: event.target.value})
+  }
 
   getIncomeAmount = list => {
     let income = 0
@@ -86,12 +89,12 @@ class MoneyManager extends Component {
     })
   }
 
-  getTransactionType = () =>
-    transactionTypeOptions.map(eachType => (
-      <option key={uuidv4()} id={eachType.optionId} value={eachType.optionId}>
-        {eachType.displayText}
-      </option>
-    ))
+  //   getTransactionType = () =>
+  //     transactionTypeOptions.map(eachType => (
+  //       <option key={uuidv4()} id={eachType.optionId} value={eachType.optionId}>
+  //         {eachType.displayText}
+  //       </option>
+  //     ))
 
   render() {
     const {title, amount, transactionHistoryList} = this.state
@@ -157,7 +160,19 @@ class MoneyManager extends Component {
                 />
                 <label htmlFor="type">TYPE</label>
                 <select id="type" onChange={this.onTypeChange}>
-                  {this.getTransactionType()}
+                  <option
+                    key={uuidv4()}
+                    value={transactionTypeOptions[0].optionId}
+                    selected
+                  >
+                    {transactionTypeOptions[0].displayText}
+                  </option>
+                  <option
+                    key={uuidv4()}
+                    value={transactionTypeOptions[1].optionId}
+                  >
+                    {transactionTypeOptions[1].displayText}
+                  </option>
                 </select>
                 <button type="submit">Add</button>
               </form>
