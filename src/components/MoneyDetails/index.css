@@ -1,0 +1,13 @@
+/* Write your CSS here */
+.money-detail-container {
+  display: flex;
+  flex-direction: row;
+  margin-right: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.money-detail-image {
+  height: 100px;
+  padding-right: 20px;
+}
