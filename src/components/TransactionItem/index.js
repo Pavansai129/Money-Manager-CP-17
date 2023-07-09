@@ -11,7 +11,7 @@ const TransactionItem = props => {
     isClicked,
     deleteImg,
   } = eachTransaction
-  const transactionType = type.charAt(0).toUpperCase() + type.slice(1)
+  const transactionType = type[0].toUpperCase() + type.slice(1).toLowerCase()
   const onDeleteTransaction = () => {
     deleteTransaction(transactionId)
   }
