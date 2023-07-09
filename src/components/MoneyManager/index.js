@@ -23,8 +23,6 @@ class MoneyManager extends Component {
     amount: '',
     type: transactionTypeOptions[0].displayText,
     transactionHistoryList: [],
-    income: 0,
-    expenses: 0,
   }
 
   onTitleChange = event => this.setState({title: event.target.value})
@@ -32,6 +30,26 @@ class MoneyManager extends Component {
   onAmountChange = event => this.setState({amount: event.target.value})
 
   onTypeChange = event => this.setState({type: event.target.value})
+
+  getIncomeAmount = list => {
+    let income = 0
+    list.forEach(each => {
+      if (each.type === 'Income') {
+        income += parseInt(each.amount)
+      }
+    })
+    return income
+  }
+
+  getExpensesAmount = list => {
+    let expenses = 0
+    list.forEach(each => {
+      if (each.type === 'Expenses') {
+        expenses += parseInt(each.amount)
+      }
+    })
+    return expenses
+  }
 
   deleteTransaction = uniqueId => {
     this.setState(prevState => ({
@@ -49,6 +67,7 @@ class MoneyManager extends Component {
     const {title, amount, type, transactionHistoryList} = this.state
     const transactionId = uuidv4()
     const isClicked = false
+    const incomeAmount = 0
     const deleteImg =
       'https://assets.ccbp.in/frontend/react-js/money-manager/delete.png'
     const transaction = {
@@ -61,6 +80,9 @@ class MoneyManager extends Component {
     }
     this.setState({
       transactionHistoryList: [...transactionHistoryList, transaction],
+      title: '',
+      amount: '',
+      type: '',
     })
   }
 
@@ -77,7 +99,12 @@ class MoneyManager extends Component {
     const filteredTransactionsList = transactionHistoryList.filter(
       eachTransaction => eachTransaction.isClicked === false,
     )
-
+    const incomeAmount = this.getIncomeAmount(filteredTransactionsList)
+    const expensesAmount = this.getExpensesAmount(filteredTransactionsList)
+    const balanceAmount =
+      incomeAmount > expensesAmount
+        ? incomeAmount - expensesAmount
+        : -(expensesAmount - incomeAmount)
     return (
       <div className="money-manager-app-bg-container">
         <div className="app-container">
@@ -89,22 +116,24 @@ class MoneyManager extends Component {
           </div>
           <div className="money-details-container">
             <MoneyDetails
-              detail="Balance"
-              amount={0}
+              detail="Your Balance"
+              amount={balanceAmount}
               imgUrl="https://assets.ccbp.in/frontend/react-js/money-manager/balance-image.png"
               alternate="balance"
             />
             <MoneyDetails
-              detail="Income"
-              amount={0}
+              detail="Your Income"
+              amount={incomeAmount}
               imgUrl="https://assets.ccbp.in/frontend/react-js/money-manager/income-image.png"
               alternate="income"
+              testId="incomeAmount"
             />
             <MoneyDetails
-              detail="Expenses"
-              amount={0}
+              detail="Your Expenses"
+              amount={expensesAmount}
               imgUrl="https://assets.ccbp.in/frontend/react-js/money-manager/expenses-image.png"
               alternate="expenses"
+              testId="expensesAmount"
             />
           </div>
           <div className="form-and-history-container">
