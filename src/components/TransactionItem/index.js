@@ -18,7 +18,7 @@ const TransactionItem = props => {
   return (
     <li className="transaction-item">
       <p className="each-transaction-item">{title}</p>
-      <p className="each-transaction-item">{amount}</p>
+      <p className="each-transaction-item">Rs {amount}</p>
       <p className="each-transaction-item">{transactionType}</p>
       <button type="button" onClick={onDeleteTransaction} data-testid="delete">
         <img src={deleteImg} alt="delete" className="delete-image" />

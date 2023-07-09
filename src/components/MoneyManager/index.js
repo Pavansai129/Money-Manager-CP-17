@@ -89,12 +89,12 @@ class MoneyManager extends Component {
     })
   }
 
-  //   getTransactionType = () =>
-  //     transactionTypeOptions.map(eachType => (
-  //       <option key={uuidv4()} id={eachType.optionId} value={eachType.optionId}>
-  //         {eachType.displayText}
-  //       </option>
-  //     ))
+  getTransactionType = () =>
+    transactionTypeOptions.map(eachType => (
+      <option key={uuidv4()} id={eachType.optionId} value={eachType.optionId}>
+        {eachType.displayText}
+      </option>
+    ))
 
   render() {
     const {title, amount, transactionHistoryList} = this.state
@@ -160,19 +160,7 @@ class MoneyManager extends Component {
                 />
                 <label htmlFor="type">TYPE</label>
                 <select id="type" onChange={this.onTypeChange}>
-                  <option
-                    key={uuidv4()}
-                    value={transactionTypeOptions[0].optionId}
-                    selected
-                  >
-                    {transactionTypeOptions[0].displayText}
-                  </option>
-                  <option
-                    key={uuidv4()}
-                    value={transactionTypeOptions[1].optionId}
-                  >
-                    {transactionTypeOptions[1].displayText}
-                  </option>
+                  {this.getTransactionType()}
                 </select>
                 <button type="submit">Add</button>
               </form>
